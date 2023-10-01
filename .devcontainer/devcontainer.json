@@ -6,12 +6,13 @@
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
   "dockerFile": "Dockerfile",
   "postAttachCommand": "rye sync",
+  "features": {
+	"ghcr.io/devcontainers-contrib/features/vercel-cli:1": {}
+  },
   "containerEnv": {
     "TZ": "Asia/Tokyo"
   },
-
   "runArgs": ["--init"],
-
   "customizations": {
     "vscode": {
       "extensions": [

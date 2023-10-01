@@ -1,0 +1,72 @@
+[project]
+name = "py-template"
+version = "0.1.0"
+description = "Add a short description here"
+authors = []
+dependencies = [
+    "pip>=23.2.1",
+]
+requires-python = ">= 3.9"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = [
+    "pytest>=7.4.0",
+    "ipykernel>=6.25.1",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.ruff]
+select = [
+    "ALL",
+]
+ignore = [
+    "ERA", # Found commented-out code
+    "BLE", # flake8-blind-except
+    "FBT", # flake8-boolean-trap
+    "TRY", # tryceratops
+    "EXE", # flake8-executable
+    "ICN", # flake8-import-conventions
+    "RET", #flake8-return
+    "SIM", #flake8-simplify
+    "TCH", # flake8-type-checking
+    "G004", # Logging statement uses f-string
+    "PD901", # df is a bad variable name. Be kinder to your future self.
+    "RUF001", # String contains ambiguous {}. Did you mean {}?
+    "RUF002", # Docstring contains ambiguous {}. Did you mean {}?
+    "RUF003", # Comment contains ambiguous {}. Did you mean {}?
+    "PLC1901", # {existing} can be simplified to {replacement} as an empty string is falsey
+    "D203", # 1 blank line required before class docstring
+    "D407", # Missing dashed underline after section ("{name}")
+    "E731", # Do not assign a lambda expression, use a def
+    "E203", # Whitespace before '{symbol}'
+    "PERF203", # try-except within a loop incurs performance overhead
+    "PLR2004", # magic number
+    "B904", # Within an except clause, raise exceptions with ...
+    "ANN101", # missing-type-self: because no type hint is attached to the argument self
+    "ANN102", # missing-type-cls: because no type hint is attached to the argument cls
+    "ANN003", # Missing type annotation for **{name}
+]
+unfixable = ["F401", "F841", "E401"]
+exclude = [".venv"]
+target-version = ["py39", "py310", "py311"]
+line-length = 119
+
+[tool.black]
+line-length = 119
+target-version = ["py39", "py310", "py311"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.mypy]
+python_version = ["py39", "py310", "py311"]
+no_strict_optional = true
+ignore_missing_imports = true
+check_untyped_defs = true

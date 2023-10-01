@@ -1,0 +1,50 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
+{
+  "name": "devcontainer-ubuntu",
+  // "image": "mcr.microsoft.com/devcontainers/base:jammy",
+  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+  "dockerFile": "Dockerfile",
+  "postAttachCommand": "rye sync",
+  "containerEnv": {
+    "TZ": "Asia/Tokyo"
+  },
+
+  "runArgs": ["--init"],
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.black-formatter",
+        "charliermarsh.ruff",
+        "njpwerner.autodocstring",
+        "ms-toolsai.jupyter",
+        "oderwat.indent-rainbow",
+        "IBM.output-colorizer",
+        "christian-kohler.path-intellisense"
+      ],
+      "settings": {
+        "[python]": {
+          "editor.defaultFormatter": "ms-python.black-formatter",
+          "editor.formatOnSave": true,
+          "editor.formatOnPaste": true,
+          "editor.formatOnType": false,
+          "editor.insertSpaces": true,
+          "editor.codeActionsOnSave": {
+            "source.fixAll.ruff": true,
+            "source.organizeImports.ruff": true
+          },
+          "editor.wordBasedSuggestions": true
+        },
+        "python.languageServer": "Pylance",
+        "python.testing.pytestEnabled": true,
+        "ruff.args": ["--config=${workspaceFolder}/pyproject.toml"],
+        "autoDocstring.docstringFormat": "google"
+      }
+    }
+  },
+  "remoteUser": "vscode",
+  "postCreateCommand": "/bin/sh .devcontainer/postCreateCommand.sh"
+}

@@ -14,7 +14,7 @@ class handler(BaseHTTPRequestHandler):
         self.send_header('Content-type','text/plain')
         self.end_headers()
         self.wfile.write("hello world")
-        returncommit 
+        return 
         # self.send_response(200)
         # self.send_header('Content-type','text/plain')
         # self.end_headers()

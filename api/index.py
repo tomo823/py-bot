@@ -5,7 +5,7 @@ import json
 class handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
-                # # Parse query string
+        # Parse query string
         parsed_path = urlparse(self.path)
         query = json.loads(parsed_path.query)
 

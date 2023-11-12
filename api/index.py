@@ -1,7 +1,7 @@
 from http.server import BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 import json
-
+from respond import environment_setting, default_setting, folder_list, openai, pinecone, vector_store
 
 
 class handler(BaseHTTPRequestHandler):

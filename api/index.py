@@ -3,7 +3,8 @@ from urllib.parse import urlparse, parse_qs
 import json, sys, pinecone, openai, os
 from pathlib import Path
 
-import pinecone, os, openai
+#import pinecone 
+import os, openai
 from llama_index.utils import truncate_text
 from llama_index import VectorStoreIndex
 from llama_index.vector_stores import PineconeVectorStore
@@ -26,7 +27,7 @@ class handler(BaseHTTPRequestHandler):
         parsed_path = urlparse(self.path)
         query = str(parsed_path.query.strip("q="))
         # get response from respond.py
-        response = respond.get_query(query)
+        #response = respond.get_query(query)
         self.send_response(200)
         self.send_header("Content-type", "text/plain; charset=utf-8")
         self.end_headers()

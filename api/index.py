@@ -3,7 +3,8 @@ from urllib.parse import urlparse, parse_qs
 from pathlib import Path
 import json, sys, os
 
-import pinecone, openai
+#import pinecone
+import openai
 from llama_index.utils import truncate_text
 from llama_index import VectorStoreIndex
 from llama_index.vector_stores import PineconeVectorStore

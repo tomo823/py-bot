@@ -3,7 +3,7 @@ from urllib.parse import urlparse, parse_qs
 from pathlib import Path
 import json, sys, os
 sys.path.append(str(Path(__file__).resolve().parent.parent))
-from Laf import respond
+#from Laf import respond
 
 # import pinecone
 import openai
@@ -18,7 +18,7 @@ class handler(BaseHTTPRequestHandler):
         parsed_path = urlparse(self.path)
         query = str(parsed_path.query.strip("q="))
         # get response from respond.py
-        response = respond.get_query(query)
+        #response = respond.get_query(query)
         self.send_response(200)
         self.send_header("Content-type", "text/plain; charset=utf-8")
         self.end_headers()

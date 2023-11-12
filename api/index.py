@@ -1,7 +1,8 @@
 from http.server import BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
-import json, sys
 from pathlib import Path
+import json, sys
+
 
 #import pinecone 
 # import os, openai, pinecone, openai, os
@@ -18,7 +19,7 @@ current_dir = Path(__file__)
 parent_dir = current_dir.parent
 sys.path.append(str(parent_dir))
 
-from Laf import respond
+#from Laf import respond
 
 
 class handler(BaseHTTPRequestHandler):

@@ -1,8 +1,8 @@
 from http.server import BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 from pathlib import Path
-sys.path.append(str(Path(__file__).resolve().parent.parent))
 import json, sys, os
+sys.path.append(str(Path(__file__).resolve().parent.parent))
 from Laf import respond
 
 # import pinecone
@@ -10,12 +10,6 @@ import openai
 from llama_index.utils import truncate_text
 from llama_index import VectorStoreIndex
 from llama_index.vector_stores import PineconeVectorStore
-
-
-# add path to respond.py which is in the parent directory
-
-
-# from Laf import respond
 
 
 class handler(BaseHTTPRequestHandler):
@@ -28,5 +22,5 @@ class handler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header("Content-type", "text/plain; charset=utf-8")
         self.end_headers()
-        self.wfile.write(f"{response}".encode("utf-8"))
+        self.wfile.write(f"{sys.path}".encode("utf-8"))
         return

@@ -1,15 +1,13 @@
 from http.server import BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 from pathlib import Path
-import json, sys
+import json, sys, os
 
-import pinecone 
-# import os, openai, pinecone, openai, os
-# from llama_index.utils import truncate_text
-# from llama_index import VectorStoreIndex
-# from llama_index.vector_stores import PineconeVectorStore
+import pinecone, openai
+from llama_index.utils import truncate_text
+from llama_index import VectorStoreIndex
+from llama_index.vector_stores import PineconeVectorStore
 # from dotenv import load_dotenv
-# import logging
 # import sys, glob, json, re, os
 
 # add path to respond.py which is in the parent directory

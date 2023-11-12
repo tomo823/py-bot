@@ -17,3 +17,9 @@ RUN echo "GIT_PS1_SHOWUNTRACKEDFILES=true" >> ~/.bashrc
 RUN echo "GIT_PS1_SHOWUPSTREAM=auto" >> ~/.bashrc
 
 RUN echo 'export PS1="\[\033[01;32m\]\u@\h\[\033[01;33m\] \w \[\033[01;31m\]\$(__git_ps1 \"(%s)\") \\n\[\033[01;34m\]\\$ \[\033[00m\]"' >> ~/.bashrc
+
+RUN apt-get update \
+    && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get -y install --no-install-recommends python3-pip \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*

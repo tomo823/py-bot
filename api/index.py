@@ -5,11 +5,10 @@ import json, sys, os
 
 # Pathインスタンスを作成
 p = Path()
-sys.path.append(str(p.cwd()))
-sys.path.append(str(p.resolve().parent))
+sys.path.append(str(p.resolve().parent.parent))
 
 file = os.listdir(p.cwd())
-# from Laf import respond
+from Laf import respond
 
 # import pinecone
 import openai

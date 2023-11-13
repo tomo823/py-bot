@@ -118,9 +118,6 @@ def get_query(query):
     return re.sub(r"\..*\/", "", key[0]).rstrip(".txt")
 
 
-# get_query("三角形の内角の和は何度？")
-
-
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         # get query from url and strip "q="
@@ -130,6 +127,6 @@ class handler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header("Content-type", "text/plain; charset=utf-8")
         self.end_headers()
-        self.wfile.write(f"{get_query(query)}".encode("utf-8"))
+        self.wfile.write(f"question: {query}".encode("utf-8"))
 
         return

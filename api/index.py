@@ -1,13 +1,13 @@
 from http.server import BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 from pathlib import Path
-import json, sys, os, path
+import json, sys, os
 
 # Pathインスタンスを作成 
 p = Path()
 sys.path.append(str(p.parent.resolve()))
 
-from Laf import respond
+# from Laf import respond
 
 # import pinecone
 import openai

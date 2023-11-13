@@ -124,11 +124,11 @@ class handler(BaseHTTPRequestHandler):
         # get query from url and strip "q="
         parsed_path = urlparse(self.path)
         query = str(parsed_path.query).strip("q=")
-        encoded_query = quote(query, encoding="utf-8")
-        decoded_query = unquote(encoded_query)
+        #encoded_query = quote(query, encoding="utf-8")
+        #decoded_query = unquote(encoded_query)
         self.send_response(200)
         self.send_header("Content-type", "text/plain; charset=utf-8")
         self.end_headers()
-        self.wfile.write(f"question: {decoded_query}".encode("utf-8"))
+        self.wfile.write(f"question: {query}".encode("utf-8"))
 
         return

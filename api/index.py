@@ -3,8 +3,8 @@ from urllib.parse import urlparse, parse_qs
 from pathlib import Path
 import json, sys, os, path
 
-folder = path.path(__file__).abspath()
-sys.path.append(folder.parent.parent)
+# folder = path.path(__file__).abspath()
+# sys.path.append(folder.parent.parent)
 from Laf.respond import get_query
 
 # import pinecone

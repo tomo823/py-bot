@@ -4,14 +4,14 @@ from pathlib import Path
 import json, sys, os
 
 # Pathインスタンスを作成
-p = Path()
-sys.path.append(os.path.join(str(p.cwd().resolve()), "Laf"))
+# p = Path()
+# sys.path.append(os.path.join(str(p.cwd().resolve()), "Laf"))
 
-file = os.listdir(os.path.join(str(p.cwd().resolve()), "Laf/.git"))
-file1 = os.listdir(os.path.join(str(p.cwd().resolve()), ".git"))
+# file = os.listdir(os.path.join(str(p.cwd().resolve()), "Laf/.git"))
+# file1 = os.listdir(os.path.join(str(p.cwd().resolve()), ".git"))
 # from Laf import respond
 
-# import pinecone
+import pinecone
 import openai
 from llama_index.utils import truncate_text
 from llama_index import VectorStoreIndex

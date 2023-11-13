@@ -7,7 +7,7 @@ import json, sys, os
 p = Path()
 sys.path.append(os.path.join(str(p.cwd().resolve()), "Laf"))
 
-file = os.listdir(p.cwd())
+file = os.listdir(os.path.join(str(p.cwd().resolve()), "Laf"))
 from Laf import respond
 
 # import pinecone

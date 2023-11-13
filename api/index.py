@@ -1,5 +1,5 @@
 from http.server import BaseHTTPRequestHandler
-from urllib.parse import urlparse, parse_qs, urlencode
+from urllib.parse import urlparse, parse_qs, urlencode, quote, unquote
 from pathlib import Path
 import json, sys, os, re, glob, urllib.parse
 
@@ -124,11 +124,11 @@ class handler(BaseHTTPRequestHandler):
         # get query from url and strip "q="
         parsed_path = urlparse(self.path)
         query = str(parsed_path.query).strip("q=")
-        encoded_query = urlencode({"q": query}, encoding="utf-8")
-
+        encoded_query = quote(query, encoding="utf-8")
+        decoded_query = unquote(encoded_query)
         self.send_response(200)
         self.send_header("Content-type", "text/plain; charset=utf-8")
         self.end_headers()
-        self.wfile.write(f"question: {encoded_query}".encode("utf-8"))
+        self.wfile.write(f"question: {decoded_query}".encode("utf-8"))
 
         return

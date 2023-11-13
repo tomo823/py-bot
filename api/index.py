@@ -5,7 +5,7 @@ import json, sys, os
 
 # Pathインスタンスを作成 
 p = Path()
-sys.path.append(str(p.parent.resolve()))
+#sys.path.append(str(p.parent.resolve()))
 
 # from Laf import respond
 

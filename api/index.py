@@ -8,7 +8,7 @@ p = Path()
 sys.path.append(os.path.join(str(p.resolve().parent.parent), "Laf"))
 
 file = os.listdir(p.cwd())
-from Laf import respond
+#from Laf import respond
 
 # import pinecone
 import openai

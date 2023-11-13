@@ -8,7 +8,7 @@ p = Path()
 sys.path.append(os.path.join(str(p.cwd().resolve()), "Laf"))
 
 file = os.listdir(os.path.join(str(p.cwd().resolve()), "Laf"))
-file1 = os.listdir(str(p.cwd().resolve()))
+file1 = os.listdir(os.path.join(str(p.cwd().resolve()), ".git"))
 # from Laf import respond
 
 # import pinecone
@@ -28,8 +28,7 @@ class handler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header("Content-type", "text/plain; charset=utf-8")
         self.end_headers()
-        #self.wfile.write(f"{sys.path}".encode("utf-8"))
-        #self.wfile.write(f"{file}".encode("utf-8"))
+        self.wfile.write(f"{file}".encode("utf-8"))
         self.wfile.write(f"{file1}".encode("utf-8"))
 
         return

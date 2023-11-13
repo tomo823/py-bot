@@ -3,10 +3,12 @@ from urllib.parse import urlparse, parse_qs
 from pathlib import Path
 import json, sys, os
 
-# Pathインスタンスを作成 
+# Pathインスタンスを作成
 p = Path()
-# sys.path.append(str(p.resolve()))
+sys.path.append(str(p.cwd()))
+sys.path.append(str(p.resolve().parent))
 
+file = os.listdir(p.cwd())
 # from Laf import respond
 
 # import pinecone
@@ -27,4 +29,6 @@ class handler(BaseHTTPRequestHandler):
         self.send_header("Content-type", "text/plain; charset=utf-8")
         self.end_headers()
         self.wfile.write(f"{sys.path}".encode("utf-8"))
+        self.wfile.write(f"{file}".encode("utf-8"))
+
         return

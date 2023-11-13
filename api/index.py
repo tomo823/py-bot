@@ -1,7 +1,7 @@
 from http.server import BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 from pathlib import Path
-import json, sys, os, re, glob
+import json, sys, os, re, glob, urllib.parse
 
 # Pathインスタンスを作成
 # p = Path()
@@ -123,10 +123,11 @@ class handler(BaseHTTPRequestHandler):
         # get query from url and strip "q="
         parsed_path = urlparse(self.path)
         query = str(parsed_path.query).strip("q=")
+        encoded_query = urllib.parse.quote(query)
 
         self.send_response(200)
         self.send_header("Content-type", "text/plain; charset=utf-8")
         self.end_headers()
-        self.wfile.write(f"question: {query}".encode("utf-8"))
+        self.wfile.write(f"question: {encoded_query}".encode("utf-8"))
 
         return

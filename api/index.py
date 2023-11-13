@@ -122,7 +122,7 @@ class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         # get query from url and strip "q="
         parsed_path = urlparse(self.path)
-        query = str(parsed_path.query)
+        query = str(parsed_path.query).split("=")[1]
 
         self.send_response(200)
         self.send_header("Content-type", "text/plain; charset=utf-8")

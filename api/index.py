@@ -7,7 +7,7 @@ import json, sys, os
 p = Path()
 sys.path.append(os.path.join(str(p.cwd().resolve()), "Laf"))
 
-file = os.listdir(os.path.join(str(p.cwd().resolve()), "Laf"))
+file = os.listdir(os.path.join(str(p.cwd().resolve()), "Laf/.git"))
 file1 = os.listdir(os.path.join(str(p.cwd().resolve()), ".git"))
 # from Laf import respond
 

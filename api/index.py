@@ -5,7 +5,7 @@ import json, sys, os
 
 # Pathインスタンスを作成
 p = Path()
-sys.path.append(os.path.join(str(p.resolve().parent.parent), "Laf"))
+sys.path.append(os.path.join(str(p.cwd().resolve()), "Laf"))
 
 file = os.listdir(p.cwd())
 #from Laf import respond

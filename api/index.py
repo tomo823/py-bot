@@ -20,7 +20,7 @@ from llama_index.vector_stores import PineconeVectorStore
 
 
 # API-keyの設定
-load_dotenv()
+"""load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 pinecone.init(api_key=os.getenv("PINECONE_API_KEY"), environment="us-west4-gcp-free")
 
@@ -97,16 +97,16 @@ def get_query(query):
                     Dict[path] = text
                     # print(f"text: {text}", end="\n\n")
                     # pathの出力
-                    """print(f"Pathの出力:\n{path}")"""
+                    # print(f"Pathの出力:\n{path}")
                     # keyのlist化
                     key.append(path)
 
-                    """print(type(re.sub(r'\..*\/', '', dict[path].keys())))"""
+                    # print(type(re.sub(r'\..*\/', '', dict[path].keys())))
 
     # getting url of the reference
     with open("URL.json") as f:
         d = json.load(f)
-        """print(type(d), end="\n\n")"""
+        # print(type(d), end="\n\n")
         for i in d.values():
             for j in key:
                 # iにkeyの中からファイル名だけを代入する。type=str.
@@ -116,7 +116,7 @@ def get_query(query):
 
     print(keys)
     return re.sub(r"\..*\/", "", key[0]).rstrip(".txt")
-
+"""
 
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):

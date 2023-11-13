@@ -3,8 +3,10 @@ from urllib.parse import urlparse, parse_qs
 from pathlib import Path
 import json, sys, os, path
 
-# folder = path.path(__file__).abspath()
-# sys.path.append(folder.parent.parent)
+# Pathインスタンスを作成 
+p = Path()
+sys.path.append(str(p.parent.resolve()))
+
 from Laf import respond
 
 # import pinecone

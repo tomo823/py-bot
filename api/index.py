@@ -1,7 +1,7 @@
 from http.server import BaseHTTPRequestHandler
 from urllib.parse import urlparse, unquote
 
-import json, sys, os, re, glob, urllib.parse, time
+import json, os, re, glob, time
 import pinecone
 import openai
 from dotenv import load_dotenv
@@ -72,32 +72,21 @@ def get_query(query):
     Dict = {}
     key = []
     for files in folder_list:
-        path_list = glob.glob(files + "/*")
-        for path in path_list:
-            # print(f"Path: {path}")
-            with open(path, "r") as f:
+        for path in glob.glob(f"{files}/*"):
+            with open(path, "r", encoding="utf-8") as f:
                 text = f.read()
                 # Comparing the text of the node with the text of the response
                 if reference in text:
-                    # Obtain a path as a key, text as value
                     Dict[path] = text
-                    # Confirmation
-                    # print(f"Pathの出力:\n{path}")
-                    # Make a list of keys
                     key.append(path)
-                    # print(type(re.sub(r'\..*\/', '', dict[path].keys())))
 
     # getting url of the reference
     with open("URL.json") as f:
         d = json.load(f)
-        for i in d.values():
-            for j in key:
-                # Get only the file name from the key and assign it to i. type == str.
-                if i == re.sub(r"\..*\/", "", j).rstrip(".txt"):
-                    # urls.append(i)
-                    keys = [k for k, v in d.items() if v == i]
-    print(keys)
-    return str(re.sub(r"\..*\/", "", key[0]).rstrip(".txt"))
+        # Searching for the url of the reference from dict of urls
+        keys = next((k for k, v in d.items() if v == (re.sub(r"\..*\/", "", key[0]).rstrip(".txt")).split("\\")[-1]), None)
+
+    return keys, d[keys]
 
 
 class handler(BaseHTTPRequestHandler):
@@ -108,14 +97,15 @@ class handler(BaseHTTPRequestHandler):
         encoded_text = unquote(query)
 
         # Get answer from query
-        answer = get_query(encoded_text)
+        url, title = get_query(encoded_text)
 
         self.send_response(200)
         self.send_header("Content-type", "text/plain; charset=utf-8")
         self.end_headers()
+
         # Display query
         self.wfile.write(f"question: {encoded_text}".encode("utf-8"))
-        self.wfile.write(f"Answer: {answer}".encode("utf-8"))
+        self.wfile.write(f"Url: {url}, Title: {title}".encode("utf-8"))
         self.wfile.write(f"\n".encode("utf-8"))
         self.wfile.write(os.getenv("OPENAI_API_KEY").encode("utf-8"))
         self.wfile.write(os.getenv("PINECONE_API_KEY").encode("utf-8"))

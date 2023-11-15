@@ -11,9 +11,17 @@ from llama_index.vector_stores import PineconeVectorStore
 
 
 # Setting up environment variables
-load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
-pinecone.init(api_key=os.getenv("PINECONE_API_KEY"), environment="us-west4-gcp-free")
+env_file_path = "../.env"
+# Write your API keys in .env file
+with open(env_file_path, "r") as f:
+    for line in f:
+        # Ignore comment lines and blank lines
+        if line.strip() and not line.strip().startswith("#"):
+            key, value = line.strip().split("=", 1)
+            os.environ[key] = value
+
+openai.api_key = os.environ["OPENAI_API_KEY"]
+pinecone.init(api_key=os.getenv["PINECONE_API_KEY"], environment="us-west4-gcp-free")
 
 
 # Sources:
@@ -84,7 +92,9 @@ def get_query(query):
     with open("URL.json") as f:
         d = json.load(f)
         # Searching for the url of the reference from dict of urls
-        keys = next((k for k, v in d.items() if v == (re.sub(r"\..*\/", "", key[0]).rstrip(".txt")).split("\\")[-1]), None)
+        keys = next(
+            (k for k, v in d.items() if v == (re.sub(r"\..*\/", "", key[0]).rstrip(".txt")).split("\\")[-1]), None
+        )
 
     return keys, d[keys]
 

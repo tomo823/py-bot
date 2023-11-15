@@ -115,8 +115,6 @@ class handler(BaseHTTPRequestHandler):
 
         # Display query
         self.wfile.write(f"question: {encoded_text}".encode("utf-8"))
-        self.wfile.write(f"Url: {url}, Title: {title}".encode("utf-8"))
         self.wfile.write(f"\n".encode("utf-8"))
-        self.wfile.write(os.getenv("OPENAI_API_KEY").encode("utf-8"))
-        self.wfile.write(os.getenv("PINECONE_API_KEY").encode("utf-8"))
+        self.wfile.write(f"Url: {url}, Title: {title}".encode("utf-8"))
         return

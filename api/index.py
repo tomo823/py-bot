@@ -1,15 +1,15 @@
 from http.server import BaseHTTPRequestHandler
-from urllib.parse import urlparse, parse_qs, urlencode, quote, unquote
-from pathlib import Path
-import json, sys, os, re, glob, urllib.parse, time
+# from urllib.parse import urlparse, parse_qs, urlencode, quote, unquote
+# from pathlib import Path
+# import json, sys, os, re, glob, urllib.parse, time
 
 
-import pinecone
-import openai
-from dotenv import load_dotenv
-from llama_index.utils import truncate_text
-from llama_index import VectorStoreIndex
-from llama_index.vector_stores import PineconeVectorStore
+# import pinecone
+# import openai
+# from dotenv import load_dotenv
+# from llama_index.utils import truncate_text
+# from llama_index import VectorStoreIndex
+# from llama_index.vector_stores import PineconeVectorStore
 
 
 class handler(BaseHTTPRequestHandler):

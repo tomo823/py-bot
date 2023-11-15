@@ -1,5 +1,5 @@
 from http.server import BaseHTTPRequestHandler
-from urllib.parse import urlparse, quote
+from urllib.parse import urlparse, quote, unquote
 
 # from urllib.parse import parse_qs, urlencode, quote, unquote
 # from pathlib import Path
@@ -18,7 +18,7 @@ class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         parsed_path = urlparse(self.path)
         query = str(parsed_path.query).strip("q=")
-        encoded_text = quote(query)
+        encoded_text = unquote(query)
 
         self.send_response(200)
         self.send_header("Content-type", "text/plain; charset=utf-8")

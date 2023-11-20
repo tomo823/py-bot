@@ -1,27 +1,21 @@
+import time
+
+time_start = time.time()
+
 from http.server import BaseHTTPRequestHandler
 from urllib.parse import urlparse, unquote
 
-import json, os, re, glob, time
+import json, os, re, glob
 import pinecone
 import openai
 from dotenv import load_dotenv
 from llama_index.utils import truncate_text
 from llama_index import VectorStoreIndex
 from llama_index.vector_stores import PineconeVectorStore
-
-
-# Setting up environment variables
-env_file_path = "../.env"
-# Write your API keys in .env file
-with open(env_file_path, "r") as f:
-    for line in f:
-        # Ignore comment lines and blank lines
-        if line.strip() and not line.strip().startswith("#"):
-            key, value = line.strip().split("=", 1)
-            os.environ[key] = value
-
-openai.api_key = os.environ["OPENAI_API_KEY"]
-pinecone.init(api_key=os.getenv["PINECONE_API_KEY"], environment="us-west4-gcp-free")
+from llama_index.callbacks import CallbackManager, LlamaDebugHandler, CBEventType
+from llama_index import ListIndex, ServiceContext, SimpleDirectoryReader, VectorStoreIndex
+from llama_index import ServiceContext, LLMPredictor, TreeIndex
+from llama_index.llms import OpenAI
 
 
 # Sources:
@@ -53,10 +47,31 @@ folder_list = [
 ]
 
 
+# # Setting up environment variables
+# env_file_path = "../.env"
+# # Write your API keys in .env file
+# with open(env_file_path, "r") as f:
+#     for line in f:
+#         # Ignore comment lines and blank lines
+#         if line.strip() and not line.strip().startswith("#"):
+#             key, value = line.strip().split("=", 1)
+#             os.environ[key] = value
+
+
+openai.api_key = os.environ.get("OPENAI_API_KEY")
+pinecone.init(api_key=os.environ.get("PINECONE_API_KEY"), environment="us-west4-gcp-free")
+
+
+llama_debug = LlamaDebugHandler(print_trace_on_end=True)
+callback_manager = CallbackManager([llama_debug])
+llm = OpenAI(model="gpt-3.5-turbo", temperature=0)
+service_context = ServiceContext.from_defaults(llm=llm, callback_manager=callback_manager)
+
 # connect to idex in pinecone
 pinecone_index = pinecone.Index("keyword-search")
 vector_store = PineconeVectorStore(pinecone_index=pinecone_index, namespace="pg_essay_0.6.0")
-index = VectorStoreIndex.from_vector_store(vector_store=vector_store)
+index = VectorStoreIndex.from_vector_store(vector_store=vector_store, service_context=service_context)
+
 
 # the number of references which user will get
 query_engine = index.as_query_engine(
@@ -70,12 +85,11 @@ def get_query(query):
         return "Please enter a query"
     else:
         pass
-    response = query_engine.query(query)
 
+    response = query_engine.query(query)
     source_text_fmt = truncate_text(response.source_nodes[0].node.get_content().strip(), 350)
     # reference for response
     reference = source_text_fmt.strip("...")
-
     # Getting the title of the Reference
     Dict = {}
     key = []
@@ -118,3 +132,14 @@ class handler(BaseHTTPRequestHandler):
         self.wfile.write(f"\n".encode("utf-8"))
         self.wfile.write(f"Url: {url}, Title: {title}".encode("utf-8"))
         return
+
+
+reference, answer = get_query("√18(20-n)を自然数")
+
+time_finish = time.time()
+
+
+print(reference)
+print(answer)
+
+print(time_finish - time_start)

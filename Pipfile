@@ -9,6 +9,7 @@ pinecone-client = "==2.2.4"
 python-dotenv = "==1.0.0"
 llama-index = "==0.8.66"
 "path.py" = "*"
+fastapi = "*"
 
 [dev-packages]
 

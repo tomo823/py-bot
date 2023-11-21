@@ -1,6 +1,5 @@
 import time
 
-time_start = time.time()
 
 from http.server import BaseHTTPRequestHandler
 from urllib.parse import urlparse, unquote
@@ -18,15 +17,14 @@ from llama_index import ServiceContext, LLMPredictor, TreeIndex
 from llama_index.llms import OpenAI
 from fastapi import FastAPI
 
-time_finish = time.time()
-
 
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
-        # Parse query from url
-        print(time_finish - time_start)
+        time_start = time.time()
         self.send_response(200)
         self.send_header("Content-type", "text/plain; charset=utf-8")
         self.end_headers()
         self.wfile.write(f"hello, world".encode("utf-8"))
+        time_finish = time.time()
+        print(time_finish - time_start)
         return

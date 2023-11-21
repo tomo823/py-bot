@@ -20,10 +20,13 @@ from fastapi import FastAPI
 
 time_finish = time.time()
 
-app = FastAPI()
 
-
-@app.get("/api")
-async def hello():
-    print(time_finish - time_start)
-    return {"message": time_finish - time_start}
+class handler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        # Parse query from url
+        print(time_finish - time_start)
+        self.send_response(200)
+        self.send_header("Content-type", "text/plain; charset=utf-8")
+        self.end_headers()
+        self.wfile.write(f"hello, world".encode("utf-8"))
+        return

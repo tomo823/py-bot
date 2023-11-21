@@ -16,9 +16,9 @@ from llama_index.callbacks import CallbackManager, LlamaDebugHandler, CBEventTyp
 from llama_index import ListIndex, ServiceContext, SimpleDirectoryReader, VectorStoreIndex
 from llama_index import ServiceContext, LLMPredictor, TreeIndex
 from llama_index.llms import OpenAI
+from fastapi import FastAPI
 
 print("from print")
-
 
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -36,5 +36,13 @@ class handler(BaseHTTPRequestHandler):
         self.wfile.write(f"\n".encode("utf-8"))
         # self.wfile.write(f"Url: {url}, Title: {title}".encode("utf-8"))
         return
+
+
+app = FastAPI()
+
+@app.get("/")
+async def hello():
+    return {"message": "Hello,World"}
+
 
 print(time.time() - time_start)

@@ -22,3 +22,20 @@ logger = logging.getLogger(__name__)
 logger.info("from logger")
 print("from print")
 
+
+class handler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        # Parse query from url
+        parsed_path = urlparse(self.path)
+        query = str(parsed_path.query).strip("q=")
+        encoded_text = unquote(query)
+        # Get answer from query
+        # url, title = get_query(encoded_text)
+        self.send_response(200)
+        self.send_header("Content-type", "text/plain; charset=utf-8")
+        self.end_headers()
+        # Display query
+        self.wfile.write(f"question: {encoded_text}".encode("utf-8"))
+        self.wfile.write(f"\n".encode("utf-8"))
+        # self.wfile.write(f"Url: {url}, Title: {title}".encode("utf-8"))
+        return

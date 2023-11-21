@@ -24,6 +24,5 @@ app = FastAPI()
 
 @app.get("/api")
 async def hello():
-    return {"message": "Hello,World"}
+    return {"message": time.time() - time_start}
 
-print(time.time() - time_start)

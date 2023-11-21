@@ -17,6 +17,8 @@ from llama_index import ListIndex, ServiceContext, SimpleDirectoryReader, Vector
 from llama_index import ServiceContext, LLMPredictor, TreeIndex
 from llama_index.llms import OpenAI
 
+print("Loading...")
+
 
 # Sources:
 folder_list = [

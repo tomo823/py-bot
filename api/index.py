@@ -22,9 +22,8 @@ time_finish = time.time()
 
 app = FastAPI()
 
+
 @app.get("/api")
 async def hello():
-    return {"message": "hello"}
-
-print(time_finish - time_start)
-
+    print(time_finish - time_start)
+    return {"message": time_finish - time_start}

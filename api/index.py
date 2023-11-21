@@ -18,11 +18,13 @@ from llama_index import ServiceContext, LLMPredictor, TreeIndex
 from llama_index.llms import OpenAI
 from fastapi import FastAPI
 
-print("from print")
+time_finish = time.time()
 
 app = FastAPI()
 
 @app.get("/api")
 async def hello():
-    return {"message": time.time() - time_start}
+    return {"message": time_finish - time_start}
+
+print(time_finish - time_start)
 

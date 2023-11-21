@@ -5,7 +5,7 @@ time_start = time.time()
 from http.server import BaseHTTPRequestHandler
 from urllib.parse import urlparse, unquote
 
-import json, os, re, glob
+import json, os, re, glob, logging
 import pinecone
 import openai
 from dotenv import load_dotenv
@@ -17,8 +17,10 @@ from llama_index import ListIndex, ServiceContext, SimpleDirectoryReader, Vector
 from llama_index import ServiceContext, LLMPredictor, TreeIndex
 from llama_index.llms import OpenAI
 
-print("Loading...")
-
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+logger.info("from logger")
+print("from print")
 
 # Sources:
 folder_list = [

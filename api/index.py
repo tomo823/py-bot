@@ -1,10 +1,7 @@
-import time
-
-
 from http.server import BaseHTTPRequestHandler
 from urllib.parse import urlparse, unquote
 
-import json, os, re, glob, logging
+import json, os, re, glob, logging, time
 import pinecone
 import openai
 from dotenv import load_dotenv
@@ -15,7 +12,6 @@ from llama_index.callbacks import CallbackManager, LlamaDebugHandler, CBEventTyp
 from llama_index import ListIndex, ServiceContext, SimpleDirectoryReader, VectorStoreIndex
 from llama_index import ServiceContext, LLMPredictor, TreeIndex
 from llama_index.llms import OpenAI
-from fastapi import FastAPI
 
 
 class handler(BaseHTTPRequestHandler):

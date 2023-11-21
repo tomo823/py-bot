@@ -23,7 +23,7 @@ logger.info("from logger")
 print("from print")
 
 # Sources:
-folder_list = [
+"""folder_list = [
     "./movies/【高校数学1】数と式",
     "./movies/【中1数学】一次方程式",
     "./movies/【中1数学】空間図形",
@@ -147,3 +147,4 @@ print(reference)
 print(answer)
 
 print(time_finish - time_start)
+"""

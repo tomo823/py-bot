@@ -22,7 +22,7 @@ print("from print")
 
 app = FastAPI()
 
-@app.get("/")
+@app.get("/api")
 async def hello():
     return {"message": "Hello,World"}
 

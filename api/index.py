@@ -17,9 +17,6 @@ from llama_index import ListIndex, ServiceContext, SimpleDirectoryReader, Vector
 from llama_index import ServiceContext, LLMPredictor, TreeIndex
 from llama_index.llms import OpenAI
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-logger.info("from logger")
 print("from print")
 
 
@@ -39,3 +36,5 @@ class handler(BaseHTTPRequestHandler):
         self.wfile.write(f"\n".encode("utf-8"))
         # self.wfile.write(f"Url: {url}, Title: {title}".encode("utf-8"))
         return
+
+print(time.time() - time_start)
